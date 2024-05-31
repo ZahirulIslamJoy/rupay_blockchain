@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { initializeWeb3 } from "../web3Config/web3Config";
 import { useMetaMask } from "../context-api/MetaMaskContext";
+import { Link } from "react-router-dom";
 
 const Nav = () => {
   const { account, connectMetaMask, disconnectMetaMask } = useMetaMask();
 
-  console.log(account);
 
   return (
     <nav className="flex items-center justify-between bg-[#393E46] px-4 py-2 text-white">
@@ -48,9 +48,11 @@ const Nav = () => {
           <button className="rounded-full bg-sky-600 px-6 py-1 text-white transition-all duration-300 hover:scale-90">
             Log In
           </button>
-          <button className="rounded-full bg-sky-600 px-6 py-1 text-white transition-all duration-300 hover:scale-90">
-            Register
-          </button>
+          <Link to="/register">
+            <button className="rounded-full bg-sky-600 px-6 py-1 text-white transition-all duration-300 hover:scale-90">
+              Register
+            </button>
+          </Link>
         </div>
       </div>
     </nav>

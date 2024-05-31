@@ -21,7 +21,6 @@ export const MetaMaskProvider = ({ children }) => {
       setWeb3(result.web3Instance);
       setAccount(result.account);
       setContract(result.contractInstance);
-
       localStorage.setItem("account", result.account);
       alert("MetaMask connected!");
     }
@@ -37,26 +36,13 @@ export const MetaMaskProvider = ({ children }) => {
 
   useEffect(() => {
     if (window.ethereum) {
-      window.ethereum.on("accountsChanged", (accounts) => {
+      window.ethereum.on("accountsChanged", function (accounts) {
+        // If MetaMask account changes, force reconnection
         if (accounts.length > 0) {
-          setAccount(accounts[0]);
-          localStorage.setItem("account", accounts[0]);
-        } else {
           disconnectMetaMask();
+          connectMetaMask();
         }
       });
-
-      const savedAccount = localStorage.getItem("account");
-      if (savedAccount) {
-        const web3Instance = new Web3(window.ethereum);
-        setWeb3(web3Instance);
-        const contractInstance = new web3Instance.eth.Contract(
-          CashLessContract,
-          contactId
-        );
-        setContract(contractInstance);
-        setAccount(savedAccount);
-      }
     }
   }, []);
 
