@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Web3 from "web3";
 import { initializeWeb3 } from "../web3Config/web3Config";
 
 const MetaMaskContext = createContext();

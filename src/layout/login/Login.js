@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, {  useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useMetaMask } from '../../context-api/MetaMaskContext';
 
 const Login = () => {
     const { account, contract} = useMetaMask();
-
     console.log(contract,account)
   const [loginStatus, setLoginStatus] = useState("");
+  const navigate=useNavigate();
     const handleLogin = async (e) => {
     e.preventDefault();
      const password = e.target.password.value;
@@ -22,6 +22,17 @@ const Login = () => {
           console.error("Error logging in:", error);
         }
       };
+
+
+      useEffect(() => {
+        if (loginStatus === "user") {
+          navigate("/dashboard");
+        }
+        if (loginStatus === "notUser") {
+          //navigate("/dashboard");
+          console.log("noooo")
+        }
+      }, [loginStatus, navigate]);
 
       console.log(loginStatus)
 
