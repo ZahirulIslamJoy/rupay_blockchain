@@ -9,6 +9,7 @@ import Profile from "../layout/dashboard/Profile";
 import AddBalanceToAuthority from "../layout/dashboard/AddBalanceToAuthority";
 import Withdraw from "../layout/dashboard/Withdraw";
 import History from "../layout/dashboard/History";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -29,7 +30,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard",
-        element:<Dashboard></Dashboard>,
+        element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
         children:[
           {
             path:"profile",

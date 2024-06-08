@@ -1,40 +1,24 @@
 import React, {  useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useMetaMask } from '../../context-api/MetaMaskContext';
+import { useAuth } from '../../context-api/AuthContext';
+
 
 const Login = () => {
-    const { account, contract} = useMetaMask();
-    console.log(contract,account)
-  const [loginStatus, setLoginStatus] = useState("");
-  const navigate=useNavigate();
-    const handleLogin = async (e) => {
+  const { account } = useMetaMask();
+  const { login } = useAuth();
+  const handleLogin = async (e) => {
     e.preventDefault();
-     const password = e.target.password.value;
-     const phone =e.target.phone.value;
-        try {
-          if (!contract) {
-            throw new Error("Contract not initialized");
-          }
-          console.log(account)
-          const result = await contract.methods.loginCheck(phone,password).call({ from: account });
-          setLoginStatus(result);
-        } catch (error) {
-          console.error("Error logging in:", error);
-        }
-      };
+    const phone = e.target.phone.value;
+    const password = e.target.password.value;
 
-
-      useEffect(() => {
-        if (loginStatus === "user") {
-          navigate("/dashboard");
-        }
-        if (loginStatus === "notUser") {
-          //navigate("/dashboard");
-          console.log("noooo")
-        }
-      }, [loginStatus, navigate]);
-
-      console.log(loginStatus)
+    try {
+      await login(phone, password);
+    } catch (error) {
+      alert("Error logging in: " + error.message);
+      console.error("Error logging in:", error);
+    }
+  }
 
     return (
         <div>
