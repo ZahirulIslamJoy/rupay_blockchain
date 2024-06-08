@@ -5,7 +5,6 @@ import { useMetaMask } from "../../context-api/MetaMaskContext";
 
 const SendMoney = () => {
   const { web3, account, contract } = useMetaMask();
-  const [amount, setAmount] = useState("");
   const [message, setMessage] = useState("");
 
   const sendPayment = async (e) => {

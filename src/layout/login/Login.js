@@ -1,5 +1,4 @@
-import React, {  useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import { useMetaMask } from '../../context-api/MetaMaskContext';
 import { useAuth } from '../../context-api/AuthContext';
 

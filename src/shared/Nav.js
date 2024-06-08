@@ -1,16 +1,14 @@
 import React from "react";
 import { useMetaMask } from "../context-api/MetaMaskContext";
 import { Link } from "react-router-dom";
+import { useAuth } from "../context-api/AuthContext";
 
 const Nav = () => {
-  const { account,contract, connectMetaMask, disconnectMetaMask } = useMetaMask();
+  const { account, contract, connectMetaMask, disconnectMetaMask } =
+    useMetaMask();
+  const { logout, loginStatus } = useAuth();
 
-
-  
-  
-
-  
-
+  console.log(loginStatus);
 
   return (
     <nav className="flex items-center justify-between bg-[#393E46] px-4 py-2 text-white">
@@ -33,7 +31,7 @@ const Nav = () => {
           </li>
         </ul>
         <div className="flex items-center justify-between gap-5">
-          {account  && contract ? (
+          {account && contract ? (
             <>
               <button
                 onClick={disconnectMetaMask}
@@ -50,11 +48,21 @@ const Nav = () => {
               Connect
             </button>
           )}
-          <Link to="/login">
-          <button className="rounded-full bg-sky-600 px-6 py-1 text-white transition-all duration-300 hover:scale-90">
-            Log In
-          </button>
-          </Link>
+          {loginStatus !== "user" && loginStatus !== "authority" ? (
+            <Link to="/login">
+              <button className="rounded-full bg-sky-600 px-6 py-1 text-white transition-all duration-300 hover:scale-90">
+                Log In
+              </button>
+            </Link>
+          ) : (
+            <button
+              onClick={logout}
+              className="rounded-full bg-sky-600 px-6 py-1 text-white transition-all duration-300 hover:scale-90"
+            >
+              Log Out
+            </button>
+          )}
+
           <Link to="/register">
             <button className="rounded-full bg-sky-600 px-6 py-1 text-white transition-all duration-300 hover:scale-90">
               Register

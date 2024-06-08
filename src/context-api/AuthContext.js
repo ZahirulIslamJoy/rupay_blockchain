@@ -23,7 +23,8 @@ export const AuthProvider = ({ children }) => {
       const result = await contract.methods.loginCheck(phone, password).call({ from: account });
       setLoginStatus(result);
       localStorage.setItem('loginStatus', result);
-      if (result === "user") {
+      console.log(result)
+      if (result === "user" || result === "authority") {
         navigate("/dashboard");
       } else {
         alert("Please Create An Account First");
