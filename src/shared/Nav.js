@@ -8,7 +8,9 @@ const Nav = () => {
     useMetaMask();
   const { logout, loginStatus } = useAuth();
 
-  console.log(loginStatus);
+  console.log(logout)
+
+  
 
   return (
     <nav className="flex items-center justify-between bg-[#393E46] px-4 py-2 text-white">

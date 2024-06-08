@@ -6,24 +6,49 @@ const MetaMaskContext = createContext();
 
 export const MetaMaskProvider = ({ children }) => {
   const [web3, setWeb3] = useState(null);
-  const [account, setAccount] = useState(localStorage.getItem("account") || null);
+  const [account, setAccount] = useState(
+    localStorage.getItem("account") || null
+  );
   const [contract, setContract] = useState(null);
+  const [loading, setLoading] = useState(true); // Initialize as true
   const navigate = useNavigate();
 
   useEffect(() => {
-    const storedContractAddress = localStorage.getItem("contractAddress");
-    const storedContractABI = localStorage.getItem("contractABI");
+    const init = async () => {
+      const result = await initializeWeb3();
+      if (result?.web3Instance) {
+        setWeb3(result.web3Instance);
+        setAccount(result.account);
+        setContract(result.contractInstance);
 
-    if (storedContractAddress && storedContractABI && web3) {
-      const contractInstance = new web3.eth.Contract(
-        JSON.parse(storedContractABI),
-        storedContractAddress
+        localStorage.setItem("account", result.account);
+        localStorage.setItem(
+          "contractAddress",
+          result.contractInstance.options.address
+        );
+        localStorage.setItem(
+          "contractABI",
+          JSON.stringify(result.contractInstance.options.jsonInterface)
+        );
+        setLoading(false); // Set loading to false after initialization
+        alert("MetaMask connected!");
+      }
+    };
+
+    init();
+  }, []); // Only run once on component mount
+  useEffect(() => {
+    if (contract) {
+      localStorage.setItem("contractAddress", contract.options.address);
+      localStorage.setItem(
+        "contractABI",
+        JSON.stringify(contract.options.jsonInterface)
       );
-      setContract(contractInstance);
     }
-  }, [web3]);
+  }, [contract]);
 
   const connectMetaMask = async () => {
+    setLoading(true);
     const result = await initializeWeb3();
     if (result?.web3Instance) {
       setWeb3(result.web3Instance);
@@ -31,9 +56,16 @@ export const MetaMaskProvider = ({ children }) => {
       setContract(result.contractInstance);
 
       localStorage.setItem("account", result.account);
-      localStorage.setItem("contractAddress", result.contractInstance.options.address);
-      localStorage.setItem("contractABI", JSON.stringify(result.contractInstance.options.jsonInterface));
-      
+      localStorage.setItem(
+        "contractAddress",
+        result.contractInstance.options.address
+      );
+      localStorage.setItem(
+        "contractABI",
+        JSON.stringify(result.contractInstance.options.jsonInterface)
+      );
+      setLoading(false);
+
       alert("MetaMask connected!");
     }
   };
@@ -57,8 +89,14 @@ export const MetaMaskProvider = ({ children }) => {
             setContract(result.contractInstance);
 
             localStorage.setItem("account", result.account);
-            localStorage.setItem("contractAddress", result.contractInstance.options.address);
-            localStorage.setItem("contractABI", JSON.stringify(result.contractInstance.options.jsonInterface));
+            localStorage.setItem(
+              "contractAddress",
+              result.contractInstance.options.address
+            );
+            localStorage.setItem(
+              "contractABI",
+              JSON.stringify(result.contractInstance.options.jsonInterface)
+            );
           });
         } else {
           setAccount(null);
@@ -71,6 +109,10 @@ export const MetaMaskProvider = ({ children }) => {
       });
     }
   }, [navigate]);
+
+  if (loading) {
+    return <div>Loading...</div>; // Render loading indicator while initializing
+  }
 
   return (
     <MetaMaskContext.Provider
