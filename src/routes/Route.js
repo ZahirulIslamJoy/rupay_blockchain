@@ -8,6 +8,7 @@ import SendMoney from "../layout/dashboard/SendMoney";
 import Profile from "../layout/dashboard/Profile";
 import AddBalanceToAuthority from "../layout/dashboard/AddBalanceToAuthority";
 import Withdraw from "../layout/dashboard/Withdraw";
+import History from "../layout/dashboard/History";
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
           {
             path:"withdraw",
             element:<Withdraw></Withdraw>
+          },
+          {
+            path:"history",
+            element:<History></History>
           },
         ]
       }
