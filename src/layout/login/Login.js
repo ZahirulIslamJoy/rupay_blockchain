@@ -10,13 +10,13 @@ const Login = () => {
     const handleLogin = async (e) => {
     e.preventDefault();
      const password = e.target.password.value;
+     const phone =e.target.phone.value;
         try {
           if (!contract) {
             throw new Error("Contract not initialized");
           }
           console.log(account)
-          const result = await contract.methods.loginCheck(password).call({ from: account });
-         
+          const result = await contract.methods.loginCheck(phone,password).call({ from: account });
           setLoginStatus(result);
         } catch (error) {
           console.error("Error logging in:", error);
@@ -35,9 +35,6 @@ const Login = () => {
       }, [loginStatus, navigate]);
 
       console.log(loginStatus)
-
-
-    
 
     return (
         <div>
@@ -63,6 +60,22 @@ const Login = () => {
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     //placeholder="Enter Your Name"
                     defaultValue={account}
+                    required
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="phone"
+                    className="block mb-2 text-sm font-medium  text-white"
+                  >
+                    Phone  No
+                  </label>
+                  <input
+                    type="phone"
+                    name="phone"
+                    id="name"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Enter Your Phone No"
                     required
                   />
                 </div>

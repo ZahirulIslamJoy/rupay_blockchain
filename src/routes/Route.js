@@ -3,6 +3,8 @@ import Main from "../main/Main";
 import Home from "../layout/homepage/Home";
 import Login from "../layout/login/Login";
 import Register from "../layout/registration/Register";
+import Dashboard from "../layout/dashboard/Dashboard";
+import SendMoney from "../layout/dashboard/SendMoney";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +22,20 @@ const router = createBrowserRouter([
         {
           path:"/register",
           element:<Register></Register>
+      },
+      {
+        path: "/dashboard",
+        element:<Dashboard></Dashboard>,
+        children:[
+          {
+            path:"profile",
+            element:<p>hi</p>
+          },
+          {
+            path:"sendmoney",
+            element:<SendMoney></SendMoney>
+          },
+        ]
       }
     ]
   },
