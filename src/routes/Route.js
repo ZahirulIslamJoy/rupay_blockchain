@@ -5,6 +5,8 @@ import Login from "../layout/login/Login";
 import Register from "../layout/registration/Register";
 import Dashboard from "../layout/dashboard/Dashboard";
 import SendMoney from "../layout/dashboard/SendMoney";
+import Profile from "../layout/dashboard/Profile";
+import AddBalanceToAuthority from "../layout/dashboard/AddBalanceToAuthority";
 
 const router = createBrowserRouter([
   {
@@ -29,11 +31,15 @@ const router = createBrowserRouter([
         children:[
           {
             path:"profile",
-            element:<p>hi</p>
+            element:<Profile></Profile>
           },
           {
             path:"sendmoney",
             element:<SendMoney></SendMoney>
+          },
+          {
+            path:"addmoney",
+            element:<AddBalanceToAuthority></AddBalanceToAuthority>
           },
         ]
       }
