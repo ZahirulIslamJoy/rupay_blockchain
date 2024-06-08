@@ -47,8 +47,19 @@ const Profile = () => {
 
   return (
     <div>
-      <h1>Balance: {balance} ETH</h1>
-      <button onClick={() => addTokens("01733850322", 1)}>Add 1 ETH</button>
+      <div className="bg-white shadow-md rounded p-4 mb-4">
+        <h1 className="text-xl font-bold mb-4">Profile</h1>
+        <div className="mb-4">
+          <label className="block text-gray-700">Balance:</label>
+          <p className="text-lg">{balance}</p>
+        </div>
+        <button
+          onClick={getBalance}
+          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
+        >
+          Refresh Balance
+        </button>
+      </div>
     </div>
   );
 };

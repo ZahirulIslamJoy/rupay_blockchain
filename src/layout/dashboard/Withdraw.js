@@ -33,7 +33,7 @@ const Withdraw = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto p-8 bg-white rounded-xl shadow-md space-y-6">
+    <div className="max-w-md mt-12 mx-auto p-8 bg-white rounded-xl shadow-md space-y-6">
       <h2 className="text-3xl font-bold text-center text-gray-800">
         Withdraw Money
       </h2>

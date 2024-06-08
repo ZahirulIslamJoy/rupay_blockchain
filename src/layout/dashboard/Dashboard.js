@@ -1,16 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { CgProfile } from "react-icons/cg";
 import { Link, Outlet } from "react-router-dom";
 import { FiSend } from "react-icons/fi";
 import { BiMoneyWithdraw } from "react-icons/bi";
 import { MdOutlineAddComment } from "react-icons/md";
 import { FaHistory } from "react-icons/fa";
+import { useAuth } from "../../context-api/AuthContext";
 
 const Dashboard = () => {
+  const { loading } = useAuth();
+  const [loginStatus, setLoginStatus] = useState(() => {
+    const status = localStorage.getItem("loginStatus");
+    return status ? status : "guest"; // Assuming "guest" as the default value
+  });
+
+  useEffect(() => {
+    if (!loading) {
+      const status = localStorage.getItem("loginStatus");
+      if (status) setLoginStatus(status);
+    }
+  }, [loading]);
+
+  console.log(loginStatus);
 
   return (
-    <div  
-    >
+    <div>
       <button
         data-drawer-target="separator-sidebar"
         data-drawer-toggle="separator-sidebar"
@@ -39,14 +53,14 @@ const Dashboard = () => {
         className={`fixed top-0 left-0 z-40 w-64 h-screen transition-transform  -translate-x-full sm:translate-x-0`}
         aria-label="Sidebar"
       >
-        <div className="h-full px-3 py-4 overflow-y-auto bg-gray-800">
+        <div className="h-full px-3 py-4 overflow-y-auto bg-[#1F407F]">
           <ul className="space-y-2 font-medium">
             <li>
-                <span className="ms-3 text-white text-md">Dashboard</span>
+              <span className="ms-3 text-white text-md">Dashboard</span>
             </li>
             <li>
-              <Link to="/dashboard/profile"
-
+              <Link
+                to="/dashboard/profile"
                 className="flex items-center p-2  rounded-lg text-white hover:bg-gray-700 group"
               >
                 <CgProfile size={15} />
@@ -54,44 +68,55 @@ const Dashboard = () => {
               </Link>
             </li>
             <li>
-              <Link to="/dashboard/sendmoney"
-            
-            className="flex items-center p-2  rounded-lg text-white hover:bg-gray-700 group"
+              <Link
+                to="/dashboard/sendmoney"
+                className="flex items-center p-2  rounded-lg text-white hover:bg-gray-700 group"
               >
                 <FiSend size={15} color="white"></FiSend>
-                <span className="flex-1 ms-3 whitespace-nowrap">Send Money</span>
+                <span className="flex-1 ms-3 whitespace-nowrap">
+                  Send Money
+                </span>
               </Link>
             </li>
+            {loginStatus === "user" && (
+              <li>
+                <Link
+                  to="/dashboard/withdraw"
+                  className="flex items-center p-2  rounded-lg text-white hover:bg-gray-700 group"
+                >
+                  <BiMoneyWithdraw size={15} />
+                  <span className="flex-1 ms-3 whitespace-nowrap">
+                    Withdraw
+                  </span>
+                </Link>
+              </li>
+            )}
+            {loginStatus === "authority" && (
+              <li>
+                <Link
+                  to="/dashboard/addmoney"
+                  className="flex items-center p-2  rounded-lg text-white hover:bg-gray-700 group"
+                >
+                  <MdOutlineAddComment size={15} />
+                  <span className="flex-1 ms-3 whitespace-nowrap">
+                    Add Money
+                  </span>
+                </Link>
+              </li>
+            )}
             <li>
-              <Link to="/dashboard/withdraw"
-            
-            className="flex items-center p-2  rounded-lg text-white hover:bg-gray-700 group"
-              >
-                <BiMoneyWithdraw size={15} />
-                <span className="flex-1 ms-3 whitespace-nowrap">Withdraw</span>
-              </Link>
-            </li>
-            <li>
-              <Link to="/dashboard/addmoney"
-            
-            className="flex items-center p-2  rounded-lg text-white hover:bg-gray-700 group"
-              >
-                <MdOutlineAddComment size={15} />
-                <span className="flex-1 ms-3 whitespace-nowrap">Add Money</span>
-              </Link>
-            </li>
-            <li>
-              <Link to="/dashboard/history"
-            
-            className="flex items-center p-2  rounded-lg text-white hover:bg-gray-700 group"
+              <Link
+                to="/dashboard/history"
+                className="flex items-center p-2  rounded-lg text-white hover:bg-gray-700 group"
               >
                 <FaHistory size={15} />
-                <span className="flex-1 ms-3 whitespace-nowrap">Tranaction History</span>
+                <span className="flex-1 ms-3 whitespace-nowrap">
+                  Tranaction History
+                </span>
               </Link>
             </li>
           </ul>
           <ul className="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">
-          
             <li>
               <Link
                 href="#"

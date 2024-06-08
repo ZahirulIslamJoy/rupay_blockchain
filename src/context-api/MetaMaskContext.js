@@ -31,7 +31,7 @@ export const MetaMaskProvider = ({ children }) => {
           JSON.stringify(result.contractInstance.options.jsonInterface)
         );
         setLoading(false); // Set loading to false after initialization
-        alert("MetaMask connected!");
+        // alert("MetaMask connected!");
       }
     };
 
@@ -66,7 +66,7 @@ export const MetaMaskProvider = ({ children }) => {
       );
       setLoading(false);
 
-      alert("MetaMask connected!");
+      // alert("MetaMask connected!");
     }
   };
 

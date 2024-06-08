@@ -36,7 +36,7 @@ const SendMoney = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto p-8 bg-white rounded-xl shadow-md space-y-6">
+    <div className="max-w-md mt-12 mx-auto p-12 bg-white rounded-xl shadow-md space-y-6">
       <h2 className="text-3xl font-bold text-center text-gray-800">
         Send Money
       </h2>
@@ -48,7 +48,7 @@ const SendMoney = () => {
             name="phone"
             id="phone"
             className="mt-1 block w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-            placeholder="Enter seller's mobile number"
+            placeholder="Enter Receipent Phone number"
           />
         </label>
         <label className="block">
@@ -65,7 +65,7 @@ const SendMoney = () => {
           type="submit"
           className="w-full py-3 px-6 bg-indigo-600 text-white font-semibold rounded-md shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
-          Send Payment
+          Send
         </button>
       </form>
       {message && <p className="mt-4 text-sm text-red-600">{message}</p>}

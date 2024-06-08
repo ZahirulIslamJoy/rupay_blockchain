@@ -49,24 +49,11 @@ const  AddBalanceToAuthority= () => {
 
   return (
     <div className="container mx-auto p-4">
-      <div className="bg-white shadow-md rounded p-4 mb-4">
-        <h1 className="text-xl font-bold mb-4">Authority Profile</h1>
-        <div className="mb-4">
-          <label className="block text-gray-700">Balance:</label>
-          <p className="text-lg">{balance} ETH</p>
-        </div>
-        <button
-          onClick={getBalance}
-          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
-        >
-          Refresh Balance
-        </button>
-      </div>
 
       <div className="bg-white shadow-md rounded p-4 mb-4">
         <h2 className="text-lg font-bold mb-4">Add Money to Authority</h2>
         <div className="mb-4">
-          <label className="block text-gray-700">Amount (ETH):</label>
+          <label className="block text-gray-700">Amount:</label>
           <input
             type="number"
             value={amount}
