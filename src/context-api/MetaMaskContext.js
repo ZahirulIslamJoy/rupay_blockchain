@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { initializeWeb3 } from "../web3Config/web3Config";
+import Loader from "../loader/Loader";
 
 const MetaMaskContext = createContext();
 
@@ -10,7 +11,7 @@ export const MetaMaskProvider = ({ children }) => {
     localStorage.getItem("account") || null
   );
   const [contract, setContract] = useState(null);
-  const [loading, setLoading] = useState(true); // Initialize as true
+  //const [loading, setLoading] = useState(true); // Initialize as true
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,7 +31,7 @@ export const MetaMaskProvider = ({ children }) => {
           "contractABI",
           JSON.stringify(result.contractInstance.options.jsonInterface)
         );
-        setLoading(false); // Set loading to false after initialization
+        //setLoading(false); // Set loading to false after initialization
         // alert("MetaMask connected!");
       }
     };
@@ -48,7 +49,7 @@ export const MetaMaskProvider = ({ children }) => {
   }, [contract]);
 
   const connectMetaMask = async () => {
-    setLoading(true);
+    //setLoading(true);
     const result = await initializeWeb3();
     if (result?.web3Instance) {
       setWeb3(result.web3Instance);
@@ -64,7 +65,7 @@ export const MetaMaskProvider = ({ children }) => {
         "contractABI",
         JSON.stringify(result.contractInstance.options.jsonInterface)
       );
-      setLoading(false);
+      //setLoading(false);
 
       // alert("MetaMask connected!");
     }
@@ -110,9 +111,9 @@ export const MetaMaskProvider = ({ children }) => {
     }
   }, [navigate]);
 
-  if (loading) {
-    return <div>Loading...</div>; // Render loading indicator while initializing
-  }
+  // if (loading) {
+  //   return <div><Loader></Loader></div>; // Render loading indicator while initializing
+  // }
 
   return (
     <MetaMaskContext.Provider

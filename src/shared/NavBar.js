@@ -85,7 +85,6 @@ const Navbar = () => {
           ) : (
             <Link
             onClick={connectMetaMask}
-                to="/dashboard"
                 className="rounded-md bg-red-500 ml-8 px-6 py-1 text-white transition-all duration-300 hover:scale-90"
               >
                 Connect
