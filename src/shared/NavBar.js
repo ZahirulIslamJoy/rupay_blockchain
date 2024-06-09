@@ -67,12 +67,14 @@ const Navbar = () => {
               Log Out
             </button>
           )}  
-              <Link
+              {
+                !loginStatus && <Link
                 to="/register"
                 className="rounded-md bg-[#3c8eb4] ml-8 px-6 py-1 text-white transition-all duration-300 hover:scale-90"
               >
                 Sign Up
               </Link>
+              }
               {account && contract ? (
             <>
               <button

@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { initializeWeb3 } from "../web3Config/web3Config";
-import Loader from "../loader/Loader";
 
 const MetaMaskContext = createContext();
 
@@ -37,7 +36,7 @@ export const MetaMaskProvider = ({ children }) => {
     };
 
     init();
-  }, []); // Only run once on component mount
+  }, []);
   useEffect(() => {
     if (contract) {
       localStorage.setItem("contractAddress", contract.options.address);
