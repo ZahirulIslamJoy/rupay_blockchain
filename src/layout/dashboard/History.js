@@ -17,7 +17,7 @@ const History = () => {
         .getTransactionHistory()
         .call({ from: account });
       const sortedTransactions = result.sort((a, b) => {
-        return Number(b.timestamp) - Number(a.timestamp); // Convert BigInt to number for comparison
+        return Number(b.timestamp) - Number(a.timestamp);
       });
       setTransactions(sortedTransactions);
     } catch (error) {
@@ -75,7 +75,6 @@ const History = () => {
                 <td className="border-t px-4 py-2">
                   {new Date(Number(tx.timestamp) * 1000).toLocaleString()}
                 </td>{" "}
-                {/* Convert BigInt to number */}
               </tr>
             ))}
           </tbody>
