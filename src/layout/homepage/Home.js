@@ -1,5 +1,6 @@
 import React from "react";
 import Card from "./Card";
+import Enjoy from "./Enjoy";
 
 const Home = () => {
   return (
@@ -29,6 +30,7 @@ const Home = () => {
         </div>
       </div>
       <Card></Card>
+      <Enjoy></Enjoy>
     </div>
   );
 };

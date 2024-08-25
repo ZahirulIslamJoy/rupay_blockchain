@@ -1,7 +1,7 @@
 const Card = () => {
   return (
     <div className="mt-10">
-      <div className="grid grid-cols-3 gap-4 p-5">
+      <div className="grid  grid-cols-1 lg:grid-cols-3 gap-4 p-5">
 
       <div className="p-6 bg-[#edf4f9] rounded-md custom-div">
           <div className="custom-div-content p-5">
