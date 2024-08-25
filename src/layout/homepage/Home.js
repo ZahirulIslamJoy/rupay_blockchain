@@ -1,4 +1,5 @@
 import React from "react";
+import Card from "./Card";
 
 const Home = () => {
   return (
@@ -25,9 +26,9 @@ const Home = () => {
               src="https://tebewebe.online/kenepay/wp-content/uploads/sites/89/2024/02/horizontal-shot-of-optimisitc-joyful-couple-chat-w-2023-11-27-05-19-16-utc.png"
             ></img>
           </div>
-          
         </div>
       </div>
+      <Card></Card>
     </div>
   );
 };
