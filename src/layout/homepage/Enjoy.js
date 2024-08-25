@@ -15,7 +15,7 @@ const Enjoy = () => {
           <p className="text-white text-5xl font-semibold ">
             Enjoy the Convenience of Online Payments
           </p>
-          <p className="text-[#666666] font-medium ">
+          <p className="text-gray-200 font-medium ">
             Non rutrum enim class nibh platea ad. Integer velit arcu leo iaculis ligula bibendum penatibus. Aliquet morbi dui sed nulla lorem elit sociosqu quisque proin mus purus.
           </p>
         </div>
