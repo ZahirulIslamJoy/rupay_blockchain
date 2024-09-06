@@ -23,7 +23,7 @@ const Navbar = () => {
           </span>
           </div>
              */}
-           <div className="h-20 w-32 flex items-center bg-white">
+           <div className="h-16 w-32 flex items-center bg-white">
            <img className="" src={bg} />
            </div>
           </Link>

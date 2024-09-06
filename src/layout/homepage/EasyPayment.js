@@ -23,7 +23,7 @@ const EasyPayment = () => {
             <p className="font-medium">Success Payment</p>
             <p className="text-[#3064c6]" >98%</p>
           </div>
-          <div className="w-full mt-2 bg-gray-300 rounded-lg h-4">
+          <div className="w-full mt-2 bg-gray-300 rounded-lg h-3">
             <div
               className="bg-[#3064c6] text-white text-sm font-bold h-full rounded-lg flex items-center justify-start pl-2"
               style={{ width: "98%" }}
@@ -33,7 +33,7 @@ const EasyPayment = () => {
             <p className="font-medium">Positive Reviews</p>
             <p className="text-[#3064c6]" >95%</p>
           </div>
-          <div className="w-full mt-2 bg-gray-300 rounded-lg h-4">
+          <div className="w-full mt-2 bg-gray-300 rounded-lg h-3">
             <div
               className="bg-[#3064c6] text-white text-sm font-bold h-full rounded-lg flex items-center justify-start pl-2"
               style={{ width: "95%" }}
@@ -43,7 +43,7 @@ const EasyPayment = () => {
             <p className="font-medium">Secure Transaction</p>
             <p className="text-[#3064c6]" >99%</p>
           </div>
-          <div className="w-full mt-2 bg-gray-300 rounded-lg h-4">
+          <div className="w-full mt-2 bg-gray-300 rounded-lg h-3">
             <div
               className="bg-[#3064c6] text-white text-sm font-bold h-full rounded-lg flex items-center justify-start pl-2"
               style={{ width: "99%" }}

@@ -3,6 +3,8 @@ import Card from "./Card";
 import Enjoy from "./Enjoy";
 import SmartSolutions from "./SmartSolutions";
 import EasyPayment from "./EasyPayment";
+import bg from "../../assets/images/nocash.png";
+
 
 const Home = () => {
   return (
@@ -26,7 +28,8 @@ const Home = () => {
           <div>
             <img
               alt="Banner Img"
-              src="https://tebewebe.online/kenepay/wp-content/uploads/sites/89/2024/02/horizontal-shot-of-optimisitc-joyful-couple-chat-w-2023-11-27-05-19-16-utc.png"
+              src={bg}
+              //src="https://tebewebe.online/kenepay/wp-content/uploads/sites/89/2024/02/horizontal-shot-of-optimisitc-joyful-couple-chat-w-2023-11-27-05-19-16-utc.png"
             ></img>
           </div>
         </div>
