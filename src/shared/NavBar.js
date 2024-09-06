@@ -23,7 +23,9 @@ const Navbar = () => {
           </span>
           </div>
              */}
-            <img className="h-20 w-20" src={bg} />
+           <div className="h-20 w-32 flex items-center bg-white">
+           <img className="" src={bg} />
+           </div>
           </Link>
           <div className="flex items-center">
             <Link

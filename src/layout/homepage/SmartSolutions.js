@@ -1,8 +1,9 @@
 import React from "react";
+import EasyPayment from "./EasyPayment";
 
 const SmartSolutions = () => {
   return (
-    <div className="mt-16 p-6 bg-[#edf4f9]">
+    <div className="mt-16 pb-16 p-6 bg-[#edf4f9]">
       <div className="flex pt-12 flex-col items-center">
         <h1 className="text-4xl font-semibold">
           Smart Solution for Your Payment

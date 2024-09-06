@@ -2,10 +2,11 @@ import React from "react";
 import Card from "./Card";
 import Enjoy from "./Enjoy";
 import SmartSolutions from "./SmartSolutions";
+import EasyPayment from "./EasyPayment";
 
 const Home = () => {
   return (
-    <div>
+    <div className="">
       {/* Banner Section Started */}
       <div className="bg-[#1F407F] rounded-md mt-12">
         <div className="flex justify-center items-center p-8">
@@ -33,6 +34,7 @@ const Home = () => {
       <Card></Card>
       <Enjoy></Enjoy>
       <SmartSolutions></SmartSolutions>
+      <EasyPayment></EasyPayment>
     </div>
   );
 };
