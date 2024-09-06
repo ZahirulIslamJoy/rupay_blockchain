@@ -85,7 +85,7 @@ const SendMoney = () => {
                         placeholder="Enter Recipient Phone Number"
                       />
                     </label>
-                    <label className="block">
+                    <label className="block mt-2">
                       <span className="text-gray-800 text-sm font-medium">
                         Amount
                       </span>
@@ -99,7 +99,7 @@ const SendMoney = () => {
                     </label>
                     <button
                       type="submit"
-                      className="w-full py-3 px-4 bg-blue-600 text-white font-bold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300"
+                      className="w-full mt-6 py-3 px-4 bg-blue-600 text-white font-bold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300"
                     >
                       Send
                     </button>
