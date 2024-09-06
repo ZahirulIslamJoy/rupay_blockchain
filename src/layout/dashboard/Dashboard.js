@@ -155,7 +155,7 @@ const Dashboard = () => {
         </div>
       </aside>
 
-      <div className="p-4 sm:ml-64">
+      <div className="p-4 bg-[#edf4f9] sm:ml-64 min-h-screen">
         <div className="p-4 shadow-sm">
           <Outlet></Outlet>
         </div>
