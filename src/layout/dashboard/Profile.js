@@ -79,14 +79,14 @@ const Profile = () => {
                 src={userData?.imageURL}
                 alt="User Avatar"
               />
-              <div className="absolute bottom-0 left-0 right-0 h-8 bg-black bg-opacity-50 flex justify-center items-center">
+              <div className="absolute bottom-0 left-0 right-0 h-12 flex justify-center items-center">
                 <label className="text-white cursor-pointer">
-                  <span>Upload</span>
                   <input
                     type="file"
-                    className="hidden"
                     accept="image/*"
-                    // onChange={handleImageUpload}
+                    capture="camera"
+                    className="bg-gray-400 border border-gray-300 text-black sm:text-sm  focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                    //onChange={handleFileChange}
                   />
                 </label>
               </div>
