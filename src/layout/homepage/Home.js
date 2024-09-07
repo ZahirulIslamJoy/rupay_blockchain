@@ -4,6 +4,7 @@ import Enjoy from "./Enjoy";
 import SmartSolutions from "./SmartSolutions";
 import EasyPayment from "./EasyPayment";
 import bg from "../../assets/images/nocash.png";
+import TestFileUpload from "./TestFileUpload";
 
 
 const Home = () => {

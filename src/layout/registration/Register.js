@@ -10,6 +10,7 @@ const Register = () => {
 
 
   const handleFileChange = (event) => {
+    console.log('ok')
     setImage(event.target.files[0]);
   };
 
@@ -39,14 +40,6 @@ const Register = () => {
       const formData = new FormData();
       formData.append('image', image);
   
-      const response = await axios.post('https://api.imgbb.com/1/upload', formData, {
-        params: {
-          key: '9c888d75077660bbcc23f9773276a901',
-        },
-      });
-  
-      const imageUrl = response.data.data.url;
-      setImageURL(imageUrl);
   
       try {
         const response = await axios.post('https://api.imgbb.com/1/upload', formData, {
@@ -86,7 +79,7 @@ const Register = () => {
    
   };
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen flex pt-16 items-center justify-center bg-[#edf4f9]">
       <section className="w-full max-w-md p-6 bg-white rounded-lg shadow-lg">
         <div className="flex flex-col items-center justify-center">
           <div className="w-full">
@@ -241,6 +234,7 @@ const Register = () => {
           </div>
         </div>
       </section>
+      
     </div>
   );
 };

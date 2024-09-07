@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useMetaMask } from "../../context-api/MetaMaskContext";
 import Loader from "../../loader/Loader";
+import axios from "axios";
 
 const Profile = () => {
   const { web3, account, contract } = useMetaMask();
@@ -8,6 +9,8 @@ const Profile = () => {
   const [balance, setBalance] = useState(0);
   const [loading, setLoading] = useState(false);
   const [userData, setUserData] = useState(null);
+  const [image, setImage] = useState(null);
+  const [imageURL, setImageURL] = useState(null);
 
   const username = userDetails[0];
   const phone = userDetails[1];
@@ -19,7 +22,9 @@ const Profile = () => {
     }
     try {
       setLoading(true);
-      const result = await contract.methods.getBalance().call({ from: account });
+      const result = await contract.methods
+        .getBalance()
+        .call({ from: account });
       const etherBalance = web3.utils.fromWei(result, "ether");
 
       const userInfo = await contract.methods.Details().call({ from: account });
@@ -45,10 +50,65 @@ const Profile = () => {
       }
       const data = await response.json();
       setUserData(data);
-      setLoading(false)
+      setLoading(false);
     } catch (err) {
       alert(err.message);
-      setLoading(false)
+      setLoading(false);
+    }
+  };
+
+  const handleFileChange = async (event) => {
+    console.log("File input changed");
+    const file = event.target.files[0];
+    if (file) {
+      setImage(file);
+    } 
+    const formData = new FormData();
+    formData.append("image", file);
+      const response1 = await axios.post(
+        "https://api.imgbb.com/1/upload",
+        formData,
+        {
+          params: {
+            key: "9c888d75077660bbcc23f9773276a901",
+          },
+        }
+      );
+      const imageUrl = response1.data.data.url;
+      setImageURL(imageUrl)
+}
+
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    const name = e.target.name.value;
+    const id = e.target.id.value;
+    const address = e.target.address.value;
+    const bio = e.target.bio.value;
+    let imageURLs = userData?.imageURL;
+    if (imageURL) {
+      console.log(imageURL);
+      imageURLs = imageURL;
+    }
+    const data = { name, id, address, bio, imageURL: imageURLs };
+    console.log(data);
+    const response = await fetch(
+      `http://localhost:7000/users/${userData?.phone}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data), // Send the updated user data
+      }
+    );
+    if (response.ok) {
+      const result = await response.json();
+      fetchUserData();
+      alert("Profile updated successfully!");
+      console.log(result);
+    } else {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Failed to update profile");
     }
   };
 
@@ -62,7 +122,7 @@ const Profile = () => {
     }
   }, [phone]);
 
-  console.log(userData)
+  console.log(userData);
 
   return (
     <div>
@@ -85,8 +145,8 @@ const Profile = () => {
                     type="file"
                     accept="image/*"
                     capture="camera"
-                    className="bg-gray-400 border border-gray-300 text-black sm:text-sm  focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                    //onChange={handleFileChange}
+                    className="bg-gray-400 border border-gray-300 text-black sm:text-sm focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                    onChange={handleFileChange}
                   />
                 </label>
               </div>
@@ -103,12 +163,12 @@ const Profile = () => {
                 <span className="absolute bottom-3 right-0 h-2 w-2 animate-ping rounded-full bg-green-500"></span>
               </div>
               <div className="space-y-1 text-black">
-                <h1 className="font-semibold text-black">{username}</h1>
+                <h1 className="font-semibold text-black">{userData?.name}</h1>
                 <p className="font-semibold text-black">Balance:{balance}</p>
               </div>
             </div>
           </div>
-          <form>
+          <form onSubmit={handleUpdate}>
             <div className="flex justify-between gap-8">
               <div className="flex-1">
                 <div className="flex flex-col">
@@ -116,7 +176,8 @@ const Profile = () => {
                   <input
                     className="rounded-lg border mt-1  border-x-2 border-y-2 border-[#a2c3e2] bg-transparent px-4 py-2 text-black font-medium focus:outline-none"
                     type="text"
-                    defaultValue={username}
+                    name="name"
+                    defaultValue={userData?.name}
                   />
                 </div>
                 <div className="flex flex-col mt-4">
@@ -124,6 +185,7 @@ const Profile = () => {
                   <input
                     className="rounded-lg border mt-1  border-x-2 border-y-2  border-[#a2c3e2] bg-transparent px-4 py-2 text-black font-medium focus:outline-none"
                     type="text"
+                    name="address"
                     defaultValue={userData?.address}
                   />
                 </div>
@@ -132,6 +194,7 @@ const Profile = () => {
                   <input
                     className="rounded-lg border mt-1  border-x-2 border-y-2  border-[#a2c3e2] bg-transparent px-4 py-2 text-black font-medium focus:outline-none"
                     type="text"
+                    name="id"
                     defaultValue={userData?.id}
                   />
                 </div>
@@ -140,6 +203,7 @@ const Profile = () => {
                 <div className="flex flex-col">
                   <label className="font-semibold">Bio</label>
                   <textarea
+                    name="bio"
                     defaultValue={userData?.bio}
                     className="w-96 h-48 mt-4 p-4 font-medium bg-transparent border-2 border-dotted border-blue-400 rounded-lg outline-none resize-none  transition duration-300"
                   />
