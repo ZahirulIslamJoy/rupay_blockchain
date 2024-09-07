@@ -64,7 +64,7 @@ const AddBalanceToAuthority = () => {
       ) : (
         <div className="container mx-auto p-4">
           <div className="bg-white shadow-md rounded p-4 mb-4">
-            <h2 className="text-lg font-bold mb-4">Add Money to Authority</h2>
+            <h2 className="text-lg font-bold mb-4">Add Money</h2>
             <div className="mb-4">
               <label className="block text-gray-700">Amount:</label>
               <input
@@ -75,10 +75,10 @@ const AddBalanceToAuthority = () => {
               />
             </div>
             <button
-              onClick={addMoneyToAuthority}
-              className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700"
+             onClick={addMoneyToAuthority}
+              className=" mt-6 py-3 px-5 bg-blue-600 text-white font-bold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300"
             >
-              Add Money
+              Add
             </button>
           </div>
         </div>

@@ -32,8 +32,7 @@ export const AuthProvider = ({ children }) => {
         navigate("/dashboard");
       } else {
         setLoading(false); // Set loading to false if login fails
-        alert("Please Create An Account First");
-        navigate("/registration")
+        alert("Invalid Account");
       }
     } catch (error) {
       setLoading(false); // Set loading to false if login encounters an error

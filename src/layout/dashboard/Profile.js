@@ -28,6 +28,7 @@ const Profile = () => {
       const etherBalance = web3.utils.fromWei(result, "ether");
 
       const userInfo = await contract.methods.Details().call({ from: account });
+      console.log(userInfo);
       setUserDetails(userInfo); // Set the userDetails array
       setBalance(etherBalance);
       setLoading(false);
@@ -38,23 +39,28 @@ const Profile = () => {
       console.error("Error details:", error);
     }
   };
-
+  const name = userDetails[0];
+  console.log(name);
   // Fetch user data from the backend using the phone number
   const fetchUserData = async () => {
     if (!phone) return; // Ensure phone exists before making API call
     setLoading(true);
-    try {
-      const response = await fetch(`http://localhost:7000/users/${phone}`);
-      if (!response.ok) {
-        throw new Error("Error in getting phone number");
+    console.log(phone)
+    if (name != "ru") {
+      try {
+        const response = await fetch(`http://localhost:7000/users/${phone}`);
+        if (!response.ok) {
+          throw new Error("Error in getting phone number");
+        }
+        const data = await response.json();
+        setUserData(data);
+        setLoading(false);
+      } catch (err) {
+        alert(err.message);
+        setLoading(false);
       }
-      const data = await response.json();
-      setUserData(data);
-      setLoading(false);
-    } catch (err) {
-      alert(err.message);
-      setLoading(false);
     }
+    setLoading(false);
   };
 
   const handleFileChange = async (event) => {
@@ -62,21 +68,21 @@ const Profile = () => {
     const file = event.target.files[0];
     if (file) {
       setImage(file);
-    } 
+    }
     const formData = new FormData();
     formData.append("image", file);
-      const response1 = await axios.post(
-        "https://api.imgbb.com/1/upload",
-        formData,
-        {
-          params: {
-            key: "9c888d75077660bbcc23f9773276a901",
-          },
-        }
-      );
-      const imageUrl = response1.data.data.url;
-      setImageURL(imageUrl)
-}
+    const response1 = await axios.post(
+      "https://api.imgbb.com/1/upload",
+      formData,
+      {
+        params: {
+          key: "9c888d75077660bbcc23f9773276a901",
+        },
+      }
+    );
+    const imageUrl = response1.data.data.url;
+    setImageURL(imageUrl);
+  };
 
   const handleUpdate = async (e) => {
     e.preventDefault();
@@ -123,14 +129,15 @@ const Profile = () => {
   }, [phone]);
 
   console.log(userData);
+  console.log(name);
 
   return (
     <div>
       {loading ? (
         <div>
-          <Loader></Loader>
+          <Loader />
         </div>
-      ) : (
+      ) : name != "ru" ? (
         <div className="">
           <div className="flex justify-between items-center">
             <div className="relative w-48 h-48 mb-4">
@@ -219,6 +226,21 @@ const Profile = () => {
               </button>
             </div>
           </form>
+        </div>
+      ) : (
+        <div className="flex max-w-[350px] w-[192px] h-[192px] flex-col items-center justify-center space-y-4 rounded-xl bg-gray-400 p-8 shadow-lg ">
+          <div className="group relative">
+            <img
+              className="h-[60px] w-[60px] rounded-full bg-slate-500 object-cover"
+              src="https://upload.wikimedia.org/wikipedia/commons/b/ba/Logo_of_rajshahi_university.jpg"
+            />
+            <span className="absolute bottom-3 right-0 h-5 w-5 rounded-full border-[3px] border-white bg-green-500 dark:border-[#18181B]"></span>
+            <span className="absolute bottom-3 right-0 h-2 w-2 animate-ping rounded-full bg-green-500"></span>
+          </div>
+          <div className="space-y-1 text-black">
+            <h1 className="font-semibold text-black">{userData?.name}</h1>
+            <p className="font-semibold text-black">Balance:{balance}</p>
+          </div>
         </div>
       )}
     </div>
