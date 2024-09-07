@@ -31,24 +31,7 @@ const Withdraw = () => {
       const result = await contract.methods
         .getBalance()
         .call({ from: account });
-        const etherBalance = web3.utils.fromWei(result, "ether");
-        const userInfo = await contract.methods.Details().call({ from: account });
-        const data ={balance : etherBalance}
-        console.log(data)
-        console.log(userInfo)
-        if(etherBalance && userInfo){
-          const phone = userInfo[1];
-          const response = await fetch(
-            `http://localhost:7000/users/${phone}`,
-            {
-              method: "PUT",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(data), 
-            }
-          );
-        }
+        
       setLoading(false);
       setMessage("Withdrawal successful!");
     } catch (error) {

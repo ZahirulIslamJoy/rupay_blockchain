@@ -31,31 +31,7 @@ const SendMoney = () => {
       await contract.methods
         .makePayment(phone, weiAmount)
         .send({ from: account });
-        const userInfo = await contract.methods.Details().call({ from: account });
-        const name = userInfo[0];
-        if(name !="ru"){
-          const result = await contract.methods
-        .getBalance()
-        .call({ from: account });
-        const etherBalance = web3.utils.fromWei(result, "ether");
-       
-        const data ={balance : etherBalance}
-        console.log(data)
-        console.log(userInfo)
-        if(etherBalance && userInfo){
-          const phone = userInfo[1];
-          const response = await fetch(
-            `http://localhost:7000/users/${phone}`,
-            {
-              method: "PUT",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(data), 
-            }
-          );
-        }
-        }
+      const userInfo = await contract.methods.Details().call({ from: account });
       setLoading(false);
       setMessage("Send Money successful!");
     } catch (error) {

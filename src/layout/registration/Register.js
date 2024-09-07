@@ -10,7 +10,6 @@ const Register = () => {
 
 
   const handleFileChange = (event) => {
-    console.log('ok')
     setImage(event.target.files[0]);
   };
 
@@ -50,7 +49,7 @@ const Register = () => {
         const imageUrl = response.data.data.url;
         setImageURL(imageUrl);
     
-        const data = { name, phone, id, bio, address, account, imageURL: imageUrl, balance: 0, email };
+        const data = { name, phone, id, bio, address, account, imageURL: imageUrl, email };
   
         console.log(data)
         const res = await fetch('http://localhost:7000/users', {

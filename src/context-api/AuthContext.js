@@ -29,7 +29,7 @@ export const AuthProvider = ({ children }) => {
       console.log(result)
       if (result === "user" || result === "authority") {
         setLoading(false); // Set loading to false after successful login
-        navigate("/dashboard");
+        navigate("/dashboard/profile");
       } else {
         setLoading(false); // Set loading to false if login fails
         alert("Invalid Account");

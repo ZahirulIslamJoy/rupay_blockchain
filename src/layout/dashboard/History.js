@@ -64,10 +64,10 @@ const History = () => {
                 }`}
               >
                 <td className="border-t px-4 py-2">
-                  {tx.from === "01733850321" ? "Ru Authority" : tx.from}
+                  {tx.from === "01521234916" ? "Ru Authority" : tx.from}
                 </td>
                 <td className="border-t px-4 py-2">
-                  {tx.to === "01733850321" ? "Ru Authority" : tx.to}
+                  {tx.to === "01521234916" ? "Ru Authority" : tx.to}
                 </td>
                 <td className="border-t px-4 py-2">
                   {web3.utils.fromWei(tx.amount.toString(), "ether")}
